@@ -103,11 +103,12 @@ Hook::add('action_begin', function () {
  * 处理插件钩子
  * @param string $hook 钩子名称
  * @param mixed $params 传入参数
+ * @param string $extra 额外参数
  * @return void
  */
-function hook($hook, $params = [])
+function hook($hook, $params = [], $extra = null)
 {
-    Hook::listen($hook, $params);
+    Hook::listen($hook, $params, $extra);
 }
 
 /**
@@ -132,10 +133,12 @@ function get_addon_class($name, $type = 'hook', $class = null)
     }
     switch ($type) {
         case 'controller':
-            $namespace = "\\addons\\" . $name . "\\controller\\" . $class;
+//            $namespace = "\\addons\\" . $name . "\\controller\\" . $class;
+            $namespace = "addons\\" . $class;
             break;
         default:
-            $namespace = "\\addons\\" . $name . "\\" . $class;
+//            $namespace = "\\addons\\" . $name . "\\" . $class;
+            $namespace = "addons\\" . $class;
     }
 
     return class_exists($namespace) ? $namespace : '';
